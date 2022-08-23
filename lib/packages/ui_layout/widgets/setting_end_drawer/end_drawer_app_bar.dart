@@ -1,16 +1,20 @@
+import 'package:fire_ble_app/packages/business_layout/lib/src/getX/getx_controllers/controller_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
 
 class MyEndDrawer extends StatelessWidget {
-  static openEndDrawer() {
+  static openEndDrawer({color}) {
     return Builder(builder: (context) {
       return IconButton(
         onPressed: () {
           Scaffold.of(context).openEndDrawer();
         },
-        icon: const FaIcon(FontAwesomeIcons.cog, size: 15),
+        icon: const FaIcon(
+          FontAwesomeIcons.cog,
+          size: 15,
+        ),
+        color: color ?? Theme.of(context).textTheme.headline6!.color,
       );
     });
   }
@@ -26,7 +30,7 @@ class MyEndDrawer extends StatelessWidget {
     );
   }
 
-  final controllerSetting = Get.find<ImplementSettingGetXController>();
+  final controllerSetting = Get.find<MySettingGetXController>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +47,10 @@ class MyEndDrawer extends StatelessWidget {
                     // backgroundColor: Colors.grey,
                     backgroundImage:
                         NetworkImage('https://picsum.photos/1200/501'),
-                    child: Text('about'),
+                    child: Text(''),
                   ),
                 ),
-                GetBuilder<ImplementSettingGetXController>(
+                GetBuilder<MySettingGetXController>(
                   builder: (controller) => ListTile(
                     title: Text(controller.switchChangeTheme
                         ? 'Темная тема'
@@ -111,8 +115,10 @@ class MyEndDrawer extends StatelessWidget {
                   style: styleButtonDrawer(null, null),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Регистрация'),
+                  onPressed: () {
+                    // Get.to(() => LoginView());
+                  },
+                  child: Text('Войти'),
                   style: styleButtonDrawer(null, null),
                 ),
               ],
