@@ -1,11 +1,16 @@
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/listWithConnectDevices.dart';
+import 'package:fire_ble_app/packages/ui_layout/consts.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/bluetooth_off_screen.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/GetX/blue_controller.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/listWithConnectDevices/listWithConnectDevices.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/rowWithDomain.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/switch.dart';
-import 'package:fire_ble_app/packages/ui_layout/widgets/app_bar.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartPrime_1000/main_smartPrime_1000.dart';
 import 'package:fire_ble_app/packages/ui_layout/widgets/setting_end_drawer/end_drawer_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ConnectionToTheFireplacePage extends StatefulWidget {
-  static const String id = '/';
+  static const String id = '/connectionToTheFireplacePage';
 
   ConnectionToTheFireplacePage({Key? key}) : super(key: key);
 
@@ -17,21 +22,15 @@ class ConnectionToTheFireplacePage extends StatefulWidget {
 class _ConnectionToTheFireplacePageState
     extends State<ConnectionToTheFireplacePage> {
   @override
+  void initState() {
+    super.initState();
+    Get.lazyPut(() => BleGetXController());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.centerRight,
-          stops: [0.0, 0.4, 1.0],
-          colors: [
-            Color.fromRGBO(78, 77, 77, 1),
-            Color.fromRGBO(43, 42, 42, 1),
-            Color.fromRGBO(9, 7, 7, 1),
-          ],
-          tileMode: TileMode.clamp,
-        ),
-      ),
+      decoration: myDecorationBackground,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         endDrawer: MyEndDrawer(),
@@ -108,25 +107,9 @@ class _ConnectionToTheFireplacePageState
                 SizedBox(
                   height: 40,
                 ),
-                listWithConnectDevices(context: context),
+                ListWithConnectDevices(),
                 Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Image.asset(
-                        'assets/icons/premium-icon-internet-3710036 1 (Traced).png',
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'abc-fireplace.com',
-                        style: Theme.of(context).textTheme.headline2,
-                      ),
-                    ],
-                  ),
+                  child: rowWithDomain(context: context),
                 ),
               ],
             ),

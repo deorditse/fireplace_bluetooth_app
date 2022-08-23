@@ -7,5 +7,6 @@ class BasicsExampleBinding implements Bindings {
   void dependencies() {
     Get.lazyPut(() => FireplaceConnectionGetXController());
     Get.lazyPut(() => MySettingGetXController());
+    // Get.lazyPut(() => BleGetXController());
   }
 }

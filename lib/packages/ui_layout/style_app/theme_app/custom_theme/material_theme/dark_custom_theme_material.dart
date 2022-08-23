@@ -11,11 +11,11 @@ ThemeData themeDark = _themeDark.copyWith(
   backgroundColor: Colors.black,
   appBarTheme: AppBarTheme(
     toolbarHeight: 40,
-    color: Colors.greenAccent.withOpacity(0.5),
+    color: Colors.transparent,
   ),
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle().copyWith(
-      // backgroundColor: MaterialStatePropertyAll(Colors.green),
+      backgroundColor: MaterialStatePropertyAll(Colors.black),
       foregroundColor: MaterialStatePropertyAll(Colors.white),
     ),
   ),

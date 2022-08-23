@@ -1,19 +1,48 @@
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/bluetooth_off_screen.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/maint_connection_to_the_fireplace_page.dart';
-import 'package:fire_ble_app/packages/ui_layout/test_page/test_ble_page.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartFireA3_1000/main_smartFireA3_1000.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartFireA5_1000/main_smartFireA5_1000.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartPrime_1000/main_smartPrime_1000.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fire_ble_app/packages/ui_layout/style_app/theme_app/custom_theme/material_theme/dark_custom_theme_material.dart';
 import 'package:fire_ble_app/packages/ui_layout/style_app/theme_app/custom_theme/material_theme/light_custom_theme_material.dart';
 
+import 'packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/GetX/blue_controller.dart';
+import 'packages/ui_layout/pages/all_pages/smartFireA7_1000/main_smartFireA7_1000.dart';
+
 Future<void> main() async {
   // await Hive.initFlutter();
   // Services.sharedPrefs = await SharedPreferences.getInstance();
   // WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyGetApp());
+  // Get.put(BleGetXController());
+  runApp(MainPage());
+}
+
+class MainPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<BluetoothState>(
+      stream: FlutterBlue.instance.state,
+      initialData: BluetoothState.unknown,
+      builder: (c, snapshot) {
+        final state = snapshot.data;
+        return state == BluetoothState.on
+            ? MyGetApp()
+            : BluetoothOffScreen(
+                state: state,
+                myContext: context,
+              );
+      },
+    );
+  }
 }
 
 class MyGetApp extends StatelessWidget {
+  MyGetApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -23,8 +52,8 @@ class MyGetApp extends StatelessWidget {
       theme: themeDark,
       // darkTheme: themeDark,
       // themeMode: ThemeMode.system,
-      // initialRoute: ConnectionToTheFireplacePage.id,
-      initialRoute: FlutterBlueApp.id,
+      initialRoute: ConnectionToTheFireplacePage.id,
+      // initialRoute: FlutterBlueApp.id,
       getPages: [
         GetPage(
           name: ConnectionToTheFireplacePage.id,
@@ -32,10 +61,30 @@ class MyGetApp extends StatelessWidget {
           binding: BasicsExampleBinding(),
         ),
         GetPage(
-          name: FlutterBlueApp.id,
-          page: () => FlutterBlueApp(),
+          name: SmartPrime1000Page.id,
+          page: () => SmartPrime1000Page(),
           // binding: BasicsExampleBinding(),
         ),
+        GetPage(
+          name: SmartFireA71000Page.id,
+          page: () => SmartFireA71000Page(),
+          // binding: BasicsExampleBinding(),
+        ),
+        GetPage(
+          name: SmartFireA51000Page.id,
+          page: () => SmartFireA51000Page(),
+          // binding: BasicsExampleBinding(),
+        ),
+        GetPage(
+          name: SmartFireA31000Page.id,
+          page: () => SmartFireA31000Page(),
+          // binding: BasicsExampleBinding(),
+        ),
+        // GetPage(
+        //   name: FlutterBlueApp.id,
+        //   page: () => FlutterBlueApp(),
+        //   // binding: BasicsExampleBinding(),
+        // ),
       ],
     );
   }

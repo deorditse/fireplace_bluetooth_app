@@ -1,9 +1,11 @@
 import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/GetX/blue_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 
 Row mySwitchRow({required context}) {
-  FireplaceConnectionGetXController _controllerApp = Get.find();
+  BleGetXController _controllerBlue = Get.find();
 
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -12,13 +14,20 @@ Row mySwitchRow({required context}) {
         'assets/icons/free-icon-bluetooth-signal-indicator-60939 1 (Traced).png',
         fit: BoxFit.cover,
       ),
-      Obx(
-        () => Switch(
-          value: _controllerApp.isSwitch.value,
-          onChanged: (value) {
-            _controllerApp.isSwitch.value = value;
-          },
-        ),
+      StreamBuilder<bool>(
+        stream: FlutterBlue.instance.isScanning,
+        builder: (c, snapshot) {
+          return Obx(
+            () => Switch(
+              value: _controllerBlue.isSwitch.value,
+              onChanged: (value) {
+                _controllerBlue.isSwitch.value =
+                    !_controllerBlue.isSwitch.value;
+                value ? print(snapshot.data) : print(snapshot.data);
+              },
+            ),
+          );
+        },
       ),
       Expanded(
         child: Text(
