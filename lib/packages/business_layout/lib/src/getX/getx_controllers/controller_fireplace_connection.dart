@@ -7,4 +7,6 @@ import 'package:get/get.dart';
 
 class FireplaceConnectionGetXController extends GetxController {
   Rx<bool> isConnected = false.obs;
+  Rx<bool> isSwitch = false.obs;
+
 }

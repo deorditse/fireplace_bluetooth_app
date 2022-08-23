@@ -1,4 +1,5 @@
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/listWithConnectDevices.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/switch.dart';
 import 'package:fire_ble_app/packages/ui_layout/widgets/app_bar.dart';
 import 'package:fire_ble_app/packages/ui_layout/widgets/setting_end_drawer/end_drawer_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -103,25 +104,7 @@ class _ConnectionToTheFireplacePageState
                 SizedBox(
                   height: 40,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(
-                      'assets/icons/free-icon-bluetooth-signal-indicator-60939 1 (Traced).png',
-                      fit: BoxFit.cover,
-                    ),
-                    Switch(
-                      value: false,
-                      onChanged: (value) {},
-                    ),
-                    Expanded(
-                      child: Text(
-                        'Сканирование\nдоступных устройств',
-                        style: Theme.of(context).textTheme.headline2,
-                      ),
-                    ),
-                  ],
-                ),
+                mySwitchRow(context: context),
                 SizedBox(
                   height: 40,
                 ),

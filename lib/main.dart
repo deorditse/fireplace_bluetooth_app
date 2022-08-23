@@ -1,5 +1,5 @@
-import 'package:fire_ble_app/packages/business_layout/lib/src/getX/bindings.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/maint_connection_to_the_fireplace_page.dart';
+import 'package:fire_ble_app/packages/ui_layout/test_page/test_ble_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
@@ -23,18 +23,19 @@ class MyGetApp extends StatelessWidget {
       theme: themeDark,
       // darkTheme: themeDark,
       // themeMode: ThemeMode.system,
-      initialRoute: ConnectionToTheFireplacePage.id,
+      // initialRoute: ConnectionToTheFireplacePage.id,
+      initialRoute: FlutterBlueApp.id,
       getPages: [
         GetPage(
           name: ConnectionToTheFireplacePage.id,
           page: () => ConnectionToTheFireplacePage(),
           binding: BasicsExampleBinding(),
         ),
-        // GetPage(
-        //   name: NewsPage.id,
-        //   page: () => NewsPage(),
-        //   binding: BasicsExampleBinding(),
-        // ),
+        GetPage(
+          name: FlutterBlueApp.id,
+          page: () => FlutterBlueApp(),
+          // binding: BasicsExampleBinding(),
+        ),
       ],
     );
   }
