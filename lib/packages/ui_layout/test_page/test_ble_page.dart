@@ -20,7 +20,7 @@ class FlutterBlueApp extends StatelessWidget {
         builder: (c, snapshot) {
           final state = snapshot.data;
           if (state == BluetoothState.on) {
-            return FindDevicesScreen();
+            return FindDevicesScreenTest();
           }
           return BluetoothOffScreen(state: state);
         });
@@ -57,20 +57,38 @@ class BluetoothOffScreen extends StatelessWidget {
   }
 }
 
-class FindDevicesScreen extends StatelessWidget {
+class FindDevicesScreenTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Поиск устройств'),
-      ),
-      body: RefreshIndicator(
+    return Container(
+      height: MediaQuery.of(context).size.width / 2,
+      child: RefreshIndicator(
         onRefresh: () => FlutterBlue.instance.startScan(
-          timeout: Duration(seconds: 2),
+          timeout: Duration(seconds: 4),
         ),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              // StreamBuilder<bool>(
+              //   stream: FlutterBlue.instance.isScanning,
+              //   initialData: false,
+              //   builder: (c, snapshot) {
+              //     if (snapshot.data!) {
+              //       return FloatingActionButton(
+              //         child: Icon(Icons.stop),
+              //         onPressed: () => FlutterBlue.instance.stopScan(),
+              //         backgroundColor: Colors.red,
+              //       );
+              //     } else {
+              //       return FloatingActionButton(
+              //         child: Icon(Icons.search),
+              //         onPressed: () => FlutterBlue.instance.startScan(
+              //           timeout: Duration(seconds: 4),
+              //         ),
+              //       );
+              //     }
+              //   },
+              // ),
               StreamBuilder<List<BluetoothDevice>>(
                 stream: Stream.periodic(Duration(
                         seconds: 2)) //проверка с периодичностью 2 seconds
@@ -79,7 +97,7 @@ class FindDevicesScreen extends StatelessWidget {
                 builder: (c, snapshot) => Column(
                   children: snapshot.data!
                       .map((d) => ListTile(
-                            title: Text(d.name.toLowerCase()),
+                            title: Text(d.name),
                             subtitle: Text(d.id.toString()),
                             trailing: StreamBuilder<BluetoothDeviceState>(
                               stream: d.state,
@@ -123,26 +141,6 @@ class FindDevicesScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      floatingActionButton: StreamBuilder<bool>(
-        stream: FlutterBlue.instance.isScanning,
-        initialData: false,
-        builder: (c, snapshot) {
-          if (snapshot.data!) {
-            return FloatingActionButton(
-              child: Icon(Icons.stop),
-              onPressed: () => FlutterBlue.instance.stopScan(),
-              backgroundColor: Colors.red,
-            );
-          } else {
-            return FloatingActionButton(
-              child: Icon(Icons.search),
-              onPressed: () => FlutterBlue.instance.startScan(
-                timeout: Duration(seconds: 2),
-              ),
-            );
-          }
-        },
       ),
     );
   }

@@ -16,16 +16,24 @@ Row mySwitchRow({required context}) {
       ),
       StreamBuilder<bool>(
         stream: FlutterBlue.instance.isScanning,
+        initialData: false,
         builder: (c, snapshot) {
           return Obx(
-            () => Switch(
-              value: _controllerBlue.isSwitch.value,
-              onChanged: (value) {
-                _controllerBlue.isSwitch.value =
-                    !_controllerBlue.isSwitch.value;
-                value ? print(snapshot.data) : print(snapshot.data);
-              },
-            ),
+            () {
+              return Switch(
+                value: _controllerBlue.isSwitch.value,
+                onChanged: (value) {
+                  _controllerBlue.isSwitch.value =
+                      !_controllerBlue.isSwitch.value;
+
+                  value
+                      ? FlutterBlue.instance.startScan(
+                          // timeout: Duration(seconds: 20),
+                          )
+                      : FlutterBlue.instance.stopScan();
+                },
+              );
+            },
           );
         },
       ),

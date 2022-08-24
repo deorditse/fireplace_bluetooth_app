@@ -33,7 +33,7 @@ class BluetoothOffScreen extends StatelessWidget {
                           ),
                           FittedBox(
                             child: Text(
-                              'Bluetooth ${state != null ? state.toString().substring(15) : 'не включен'}.',
+                              'Bluetooth ${state != null ? state.toString().substring(15) : 'не включен'}',
                               style: Theme.of(context)
                                   .textTheme
                                   .headline2!

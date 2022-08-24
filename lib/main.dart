@@ -1,4 +1,5 @@
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/bluetooth_off_screen.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/GetX/blue_binding.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/maint_connection_to_the_fireplace_page.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartFireA3_1000/main_smartFireA3_1000.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartFireA5_1000/main_smartFireA5_1000.dart';
@@ -63,22 +64,34 @@ class MyGetApp extends StatelessWidget {
         GetPage(
           name: SmartPrime1000Page.id,
           page: () => SmartPrime1000Page(),
-          // binding: BasicsExampleBinding(),
+          bindings: [
+            BasicsExampleBinding(),
+            BleBinding(),
+          ],
         ),
         GetPage(
           name: SmartFireA71000Page.id,
           page: () => SmartFireA71000Page(),
-          // binding: BasicsExampleBinding(),
+          bindings: [
+            BasicsExampleBinding(),
+            BleBinding(),
+          ],
         ),
         GetPage(
           name: SmartFireA51000Page.id,
           page: () => SmartFireA51000Page(),
-          // binding: BasicsExampleBinding(),
+          bindings: [
+            BasicsExampleBinding(),
+            BleBinding(),
+          ],
         ),
         GetPage(
           name: SmartFireA31000Page.id,
           page: () => SmartFireA31000Page(),
-          // binding: BasicsExampleBinding(),
+          bindings: [
+            BasicsExampleBinding(),
+            BleBinding(),
+          ],
         ),
         // GetPage(
         //   name: FlutterBlueApp.id,

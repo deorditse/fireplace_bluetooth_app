@@ -93,9 +93,6 @@ class ScanResultTile extends StatelessWidget {
       leading: Text(result.rssi.toString()),
       trailing: ElevatedButton(
         child: Text('CONNECT'),
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.black),
-        ),
         onPressed: (result.advertisementData.connectable) ? onTap : null,
       ),
       children: <Widget>[
@@ -135,9 +132,9 @@ class ServiceTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('Service'),
-            Text('0x${service.uuid.toString().toUpperCase().substring(4, 8)}',
-                style: Theme.of(context).textTheme.headline1!.copyWith(
-                    color: Theme.of(context).textTheme.caption?.color))
+            Text(
+              '0x${service.uuid.toString().toUpperCase().substring(4, 8)}',
+            )
           ],
         ),
         children: characteristicTiles,
@@ -183,9 +180,8 @@ class CharacteristicTile extends StatelessWidget {
               children: <Widget>[
                 Text('Characteristic'),
                 Text(
-                    '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
-                    style: Theme.of(context).textTheme.headline1!.copyWith(
-                        color: Theme.of(context).textTheme.caption?.color))
+                  '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
+                )
               ],
             ),
             subtitle: Text(value.toString()),
@@ -243,11 +239,9 @@ class DescriptorTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text('Descriptor'),
-          Text('0x${descriptor.uuid.toString().toUpperCase().substring(4, 8)}',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline1
-                  ?.copyWith(color: Theme.of(context).textTheme.caption?.color))
+          Text(
+            '0x${descriptor.uuid.toString().toUpperCase().substring(4, 8)}',
+          )
         ],
       ),
       subtitle: StreamBuilder<List<int>>(
