@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/GetX/blue_controller.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/listWithConnectDevices/scanBleSwitchFalse.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/listWithConnectDevices/widgets.dart';
@@ -31,6 +33,7 @@ class FindDevicesScreen extends StatefulWidget {
 class _FindDevicesScreenState extends State<FindDevicesScreen> {
   bool barrier = true;
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,6 +62,9 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ...snapshot.data!.map((r) {
+                        // return ScanResultTile(
+                        //     result: r); //это удалить и добавить ниже
+                        ///
                         if (r.device.name.length > 0) {
                           barrier = false;
                           return ScanResultTile(result: r);
@@ -66,16 +72,16 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
                           return Container();
                         }
                       }).toList(),
+
+                      ///добавиь
                       if (barrier)
                         Padding(
                           padding: const EdgeInsets.only(top: 28.0),
-                          child: Container(
+                          child: Center(
                             child: CircularProgressIndicator(
                               color: myColorActivity,
                               strokeWidth: 2,
                             ),
-                            // height: MediaQuery.of(context).size.width,
-                            // width: MediaQuery.of(context).size.width,
                           ),
                         ),
                     ],

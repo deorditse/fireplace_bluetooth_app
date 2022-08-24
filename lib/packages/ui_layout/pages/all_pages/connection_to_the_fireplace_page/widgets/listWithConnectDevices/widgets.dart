@@ -10,38 +10,10 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 
 class ScanResultTile extends StatelessWidget {
-  const ScanResultTile({Key? key, required this.result}) : super(key: key);
+  ScanResultTile({Key? key, required this.result}) : super(key: key);
 
   final ScanResult result;
-
-  //
-  // Widget _buildTitle(BuildContext context) {
-  //   if (result.device.name.length > 0) {
-  //     return Column(
-  //       mainAxisAlignment: MainAxisAlignment.start,
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: <Widget>[
-  //         Text(
-  //           result.device.name,
-  //           overflow: TextOverflow.ellipsis,
-  //           style: Theme.of(context).textTheme.headline2,
-  //         ),
-  //         // FittedBox(
-  //         //   child: Text(
-  //         //     result.device.id.toString(),
-  //         //     style: Theme.of(context).textTheme.headline3,
-  //         //   ),
-  //         // ),
-  //       ],
-  //     );
-  //   } else {
-  //     return Text(
-  //       result.device.id.toString(),
-  //       overflow: TextOverflow.ellipsis,
-  //       style: Theme.of(context).textTheme.headline2,
-  //     );
-  //   }
-  // }
+  BluetoothDevice? targetDevice;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +45,9 @@ class ScanResultTile extends StatelessWidget {
                   case BluetoothDeviceState.connected:
                     onPressed = () {
                       result.device.disconnect();
+                      FlutterBlue.instance.startScan();
                     };
+
                     iconState = const Icon(
                       Icons.check,
                     );
@@ -84,8 +58,6 @@ class ScanResultTile extends StatelessWidget {
                           ),
                     );
 
-                    // Get.to();
-
                     break;
                   case BluetoothDeviceState.disconnected:
                     onPressed = () async {
@@ -93,11 +65,12 @@ class ScanResultTile extends StatelessWidget {
                       print('connect ${result.device.id}');
 
                       ///сделать проверку по имени и только после этого переводить на страницу управления
-                      Get.offAll(
+                      Get.to(
                         () => SmartPrime1000Page(
                           device: result.device,
                         ),
                       );
+                      FlutterBlue.instance.stopScan();
                     };
                     iconState = null;
                     text = Text(

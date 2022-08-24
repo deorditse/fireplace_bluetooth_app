@@ -24,7 +24,12 @@ class _ConnectionToTheFireplacePageState
   @override
   void initState() {
     super.initState();
-    Get.put(BleGetXController());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    FlutterBlue.instance.stopScan();
   }
 
   @override

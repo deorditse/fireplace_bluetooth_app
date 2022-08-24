@@ -9,9 +9,6 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fire_ble_app/packages/ui_layout/style_app/theme_app/custom_theme/material_theme/dark_custom_theme_material.dart';
-import 'package:fire_ble_app/packages/ui_layout/style_app/theme_app/custom_theme/material_theme/light_custom_theme_material.dart';
-
-import 'packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/GetX/blue_controller.dart';
 import 'packages/ui_layout/pages/all_pages/smartFireA7_1000/main_smartFireA7_1000.dart';
 
 Future<void> main() async {
@@ -59,7 +56,10 @@ class MyGetApp extends StatelessWidget {
         GetPage(
           name: ConnectionToTheFireplacePage.id,
           page: () => ConnectionToTheFireplacePage(),
-          binding: BasicsExampleBinding(),
+          bindings: [
+            BasicsExampleBinding(),
+            BleBinding(),
+          ],
         ),
         GetPage(
           name: SmartPrime1000Page.id,

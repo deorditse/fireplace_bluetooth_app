@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fire_ble_app/packages/ui_layout/consts.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/GetX/blue_binding.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/GetX/blue_controller.dart';
+
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/maint_connection_to_the_fireplace_page.dart';
 import 'package:fire_ble_app/packages/ui_layout/test_page/widgerts/widgets.dart';
 import 'package:flutter/material.dart';
@@ -20,49 +22,41 @@ class SmartPrime1000Page extends StatefulWidget {
 }
 
 class _SmartPrime1000PageState extends State<SmartPrime1000Page> {
-  List<int> _getRandomBytes() {
-    final math = Random();
-    return [
-      math.nextInt(255),
-      math.nextInt(255),
-      math.nextInt(255),
-      math.nextInt(255)
-    ];
+  BluetoothCharacteristic? targetCharacteristic;
+
+  writeData(String data) async {
+    if (targetCharacteristic == null) return;
+
+    List<int> bytes = utf8.encode(data);
+    await targetCharacteristic!.write(bytes);
   }
 
-  List<Widget> _buildServiceTiles(List<BluetoothService> services) {
-    return services
-        .map(
-          (s) => ServiceTile(
-            service: s,
-            characteristicTiles: s.characteristics
-                .map(
-                  (c) => CharacteristicTile(
-                    characteristic: c,
-                    onReadPressed: () => c.read(),
-                    onWritePressed: () async {
-                      await c.write(_getRandomBytes(), withoutResponse: true);
-                      await c.read();
-                    },
-                    onNotificationPressed: () async {
-                      await c.setNotifyValue(!c.isNotifying);
-                      await c.read();
-                    },
-                    descriptorTiles: c.descriptors
-                        .map(
-                          (d) => DescriptorTile(
-                            descriptor: d,
-                            onReadPressed: () => d.read(),
-                            onWritePressed: () => d.write(_getRandomBytes()),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                )
-                .toList(),
-          ),
-        )
-        .toList() as List<Widget>;
+  discoverServices() async {
+    final targetDevice = widget.device;
+    if (targetDevice == null) return;
+
+    List<BluetoothService> services = await targetDevice.discoverServices();
+    services.forEach(
+      (service) {
+        // if (service.uuid.toString() == SERVICE_UUID) {
+        for (var characteristic in service.characteristics) {
+          // if (characteristic.uuid.toString() == CHARACTERISTIC_UUID) {
+          targetCharacteristic = characteristic;
+          writeData("Hi there, ESP32!!");
+          setState(() {
+            print("All Ready with ${targetDevice.name}");
+          });
+          // }
+        }
+        // }
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    discoverServices();
   }
 
   @override
@@ -79,24 +73,14 @@ class _SmartPrime1000PageState extends State<SmartPrime1000Page> {
                     stream: device?.state,
                     initialData: BluetoothDeviceState.connected,
                     builder: (c, snapshot) {
-                      if (snapshot.data == BluetoothDeviceState.disconnected) {
-                        BleGetXController.instance.isSwitch.value = true;
-
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ConnectionToTheFireplacePage(),
-                          ),
-                        );
-                      }
+                      snapshot.data == BluetoothDeviceState.disconnected
+                          ? Get.back()
+                          : null;
                       return ListTile(
-                        leading:
-                            (snapshot.data == BluetoothDeviceState.connected)
-                                ? Icon(Icons.bluetooth_connected)
-                                : Icon(Icons.bluetooth_disabled),
+                        leading: Icon(Icons.bluetooth_connected),
                         title: Text(
                             'Device is ${snapshot.data.toString().split('.')[1]}.'),
-                        subtitle: Text('${device?.id}'),
+                        subtitle: Text('${device?.name}'),
                         trailing: StreamBuilder<bool>(
                           stream: device?.isDiscoveringServices,
                           initialData: false,
@@ -123,27 +107,6 @@ class _SmartPrime1000PageState extends State<SmartPrime1000Page> {
                         ),
                       );
                     }),
-                StreamBuilder<int>(
-                  stream: device?.mtu,
-                  initialData: 0,
-                  builder: (c, snapshot) => ListTile(
-                    title: Text('MTU Size'),
-                    subtitle: Text('${snapshot.data} bytes'),
-                    trailing: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () => device?.requestMtu(223),
-                    ),
-                  ),
-                ),
-                StreamBuilder<List<BluetoothService>>(
-                  stream: device?.services,
-                  initialData: [],
-                  builder: (c, snapshot) {
-                    return Column(
-                      children: _buildServiceTiles(snapshot.data!),
-                    );
-                  },
-                ),
               ],
             ),
           ),
