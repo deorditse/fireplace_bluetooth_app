@@ -81,9 +81,12 @@ class _SmartPrime1000PageState extends State<SmartPrime1000Page> {
                     builder: (c, snapshot) {
                       if (snapshot.data == BluetoothDeviceState.disconnected) {
                         BleGetXController.instance.isSwitch.value = true;
-                        Get.to(
-                          () => ConnectionToTheFireplacePage(),
-                          binding: BleBinding(),
+
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ConnectionToTheFireplacePage(),
+                          ),
                         );
                       }
                       return ListTile(

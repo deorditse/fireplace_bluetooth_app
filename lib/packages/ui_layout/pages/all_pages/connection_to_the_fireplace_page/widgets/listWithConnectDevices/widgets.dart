@@ -46,14 +46,13 @@ class ScanResultTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             flex: 5,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 8.0, top: 8),
               child: Text(
                 result.device.name,
                 overflow: TextOverflow.ellipsis,
@@ -62,10 +61,10 @@ class ScanResultTile extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 6,
+            flex: 5,
             child: StreamBuilder<BluetoothDeviceState>(
               stream: result.device.state,
-              initialData: BluetoothDeviceState.disconnected,
+              initialData: BluetoothDeviceState.connecting,
               builder: (c, snapshot) {
                 VoidCallback? onPressed;
                 Text text;
@@ -77,7 +76,6 @@ class ScanResultTile extends StatelessWidget {
                     };
                     iconState = const Icon(
                       Icons.check,
-                      size: 30,
                     );
                     text = Text(
                       'подключено',
@@ -111,7 +109,6 @@ class ScanResultTile extends StatelessWidget {
                   case BluetoothDeviceState.connecting:
                     iconState = const Icon(
                       Icons.bluetooth_audio_outlined,
-                      size: 30,
                     );
                     onPressed = null;
                     text = Text(
@@ -128,17 +125,25 @@ class ScanResultTile extends StatelessWidget {
                     break;
                 }
                 return Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Center(child: FittedBox(child: iconState)),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          child: iconState,
+                        ),
+                      ),
                     ),
                     Expanded(
-                      flex: 6,
-                      child: ElevatedButton(
-                        onPressed: onPressed,
-                        child: text,
+                      flex: 10,
+                      child: Align(
+                        child: ElevatedButton(
+                          onPressed: onPressed,
+                          child: text,
+                        ),
+                        alignment: Alignment.centerRight,
                       ),
                     ),
                   ],

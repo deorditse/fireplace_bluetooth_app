@@ -49,44 +49,40 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
           timeout: Duration(seconds: 2),
         ),
         child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                StreamBuilder<List<ScanResult>>(
-                  stream: FlutterBlue.instance.scanResults,
-                  initialData: [],
-                  builder: (context, snapshot) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ...snapshot.data!.map((r) {
-                          if (r.device.name.length > 0) {
-                            barrier = false;
-                            return ScanResultTile(result: r);
-                          } else {
-                            return Container();
-                          }
-                        }).toList(),
-                        if (barrier)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 28.0),
-                            child: Container(
-                              child: CircularProgressIndicator(
-                                color: myColorActivity,
-                                strokeWidth: 2,
-                              ),
-                              // height: MediaQuery.of(context).size.width,
-                              // width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: <Widget>[
+              StreamBuilder<List<ScanResult>>(
+                stream: FlutterBlue.instance.scanResults,
+                initialData: [],
+                builder: (context, snapshot) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ...snapshot.data!.map((r) {
+                        if (r.device.name.length > 0) {
+                          barrier = false;
+                          return ScanResultTile(result: r);
+                        } else {
+                          return Container();
+                        }
+                      }).toList(),
+                      if (barrier)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 28.0),
+                          child: Container(
+                            child: CircularProgressIndicator(
+                              color: myColorActivity,
+                              strokeWidth: 2,
                             ),
+                            // height: MediaQuery.of(context).size.width,
+                            // width: MediaQuery.of(context).size.width,
                           ),
-                      ],
-                    );
-                  },
-                ),
-              ],
-            ),
+                        ),
+                    ],
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),

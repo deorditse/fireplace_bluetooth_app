@@ -25,7 +25,6 @@ class _ConnectionToTheFireplacePageState
   void initState() {
     super.initState();
     Get.put(BleGetXController());
-    // Get.put(() => MySettingGetXController());
   }
 
   @override
