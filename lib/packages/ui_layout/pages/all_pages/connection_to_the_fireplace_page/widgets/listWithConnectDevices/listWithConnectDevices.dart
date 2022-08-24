@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/GetX/blue_controller.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/listWithConnectDevices/scanBleSwitchFalse.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/listWithConnectDevices/widgets.dart';
-import 'package:fire_ble_app/packages/ui_layout/test_page/test_ble_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
@@ -32,7 +29,6 @@ class FindDevicesScreen extends StatefulWidget {
 
 class _FindDevicesScreenState extends State<FindDevicesScreen> {
   bool barrier = true;
-
 
   @override
   Widget build(BuildContext context) {
