@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:fire_ble_app/packages/ui_layout/consts.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/connection_to_the_fireplace_page/widgets/widgets.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/connection_to_the_fireplace_page/widgets/body_page_result.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
@@ -71,9 +71,10 @@ class _SensorPageState extends State<SensorPage> {
                   stream: device?.state,
                   initialData: BluetoothDeviceState.connected,
                   builder: (c, snapshot) {
-                    snapshot.data == BluetoothDeviceState.disconnected
-                        ? Get.back()
-                        : null;
+                    if (snapshot.data == BluetoothDeviceState.disconnected) {
+                      Get.back();
+                    }
+
                     return ListTile(
                       leading: Icon(Icons.bluetooth_connected),
                       title: Text(

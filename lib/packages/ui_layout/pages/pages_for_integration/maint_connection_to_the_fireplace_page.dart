@@ -6,7 +6,6 @@ import 'package:fire_ble_app/packages/ui_layout/widgets/setting_end_drawer/end_d
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
-
 class ConnectionToTheFireplacePage extends StatefulWidget {
   static const String id = '/connectionToTheFireplacePage';
 

@@ -3,16 +3,15 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:fire_ble_app/packages/ui_layout/consts.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/sensor_page.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/test_sensor_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 
 class ScanResultTile extends StatelessWidget {
-  ScanResultTile({Key? key, required this.result}) : super(key: key);
+ const ScanResultTile({Key? key, required this.result}) : super(key: key);
 
   final ScanResult result;
-  BluetoothDevice? targetDevice;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class ScanResultTile extends StatelessWidget {
                     child: Text(
                       result.device.id.toString(),
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headline3!,
+                      style: Theme.of(context).textTheme.headline3,
                     ),
                   ),
                 ],
@@ -77,14 +76,15 @@ class ScanResultTile extends StatelessWidget {
                       );
 
                       ///сделать проверку по имени и только после этого переводить на страницу управления
-                      ///
-                      print(result.device.id);
+
+                      // if (result.device.name == TARGET_DEVICE_NAME) {
+                      //   //перебрасывать на страницу с функционалом
+                      // }
                       Get.to(
                         () => SensorPage(
                           device: result.device,
                         ),
                       );
-                      // Get.to(() => SensorPage(device: result.device));
 
                       FlutterBlue.instance.stopScan();
                     };
