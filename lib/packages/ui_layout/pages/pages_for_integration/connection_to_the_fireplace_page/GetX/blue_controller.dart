@@ -1,5 +1,3 @@
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/bluetooth_off_screen.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/maint_connection_to_the_fireplace_page.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';

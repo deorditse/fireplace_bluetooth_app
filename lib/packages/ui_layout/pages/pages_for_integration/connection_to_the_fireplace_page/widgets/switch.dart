@@ -1,5 +1,5 @@
 import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/GetX/blue_controller.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/connection_to_the_fireplace_page/GetX/blue_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
@@ -28,8 +28,10 @@ Row mySwitchRow({required context}) {
 
                   value
                       ? FlutterBlue.instance.startScan(
-                          // timeout: Duration(seconds: 20),
-                          )
+                          // timeout: Duration(
+                          //   seconds: 2,
+                          // ),
+                        )
                       : FlutterBlue.instance.stopScan();
                 },
               );

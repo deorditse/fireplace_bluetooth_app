@@ -13,7 +13,7 @@ class JoyPad extends StatefulWidget {
 class _JoyPadState extends State<JoyPad> {
   final String SERVICE_UUID = "4fafc201-1fb5-459e-8fcc-c5c9c331914b";
   final String CHARACTERISTIC_UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8";
-  final String TARGET_DEVICE_NAME = "ESP32 GET NOTI FROM DEVICE";
+  final String TARGET_DEVICE_NAME = "Дмитрий’s AirPods Pro";
 
   FlutterBlue flutterBlue = FlutterBlue.instance;
 
@@ -36,6 +36,7 @@ class _JoyPadState extends State<JoyPad> {
     });
 
     scanSubScription = flutterBlue.scan().listen((scanResult) {
+      print(scanResult.device.name);
       if (scanResult.device.name == TARGET_DEVICE_NAME) {
         print('DEVICE found');
         stopScan();
@@ -109,27 +110,31 @@ class _JoyPadState extends State<JoyPad> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(connectionText),
-      ),
-      body: Container(
-        child: targetCharacteristic == null
-            ? Center(
-                child: Text(
-                  "Waiting...",
-                  style: TextStyle(fontSize: 24, color: Colors.red),
-                ),
-              )
-            : Row(
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        writeData('data add to controller');
-                      },
-                      child: Text('write data'))
-                ],
-              ),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(connectionText),
+        ),
+        body: Container(
+          child: /* targetCharacteristic?.value == null
+              ? Center(
+                  child: Text(
+                    "Waiting...",
+                    style: TextStyle(fontSize: 24, color: Colors.red),
+                  ),
+                )
+              : */
+              Row(
+            children: [
+              Text((targetCharacteristic?.value ?? '').toString()),
+              ElevatedButton(
+                  onPressed: () {
+                    writeData('data add to controller');
+                  },
+                  child: Text('write data'))
+            ],
+          ),
+        ),
       ),
     );
   }

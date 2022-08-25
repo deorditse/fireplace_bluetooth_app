@@ -1,11 +1,11 @@
 import 'package:fire_ble_app/packages/ui_layout/consts.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/listWithConnectDevices/listWithConnectDevices.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/rowWithDomain.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/widgets/switch.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/connection_to_the_fireplace_page/widgets/switch.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/find_device_screen_widget.dart';
+import 'package:fire_ble_app/packages/ui_layout/widgets/rowWithDomain.dart';
 import 'package:fire_ble_app/packages/ui_layout/widgets/setting_end_drawer/end_drawer_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:permission_handler/permission_handler.dart';
+
 
 class ConnectionToTheFireplacePage extends StatefulWidget {
   static const String id = '/connectionToTheFireplacePage';
@@ -22,9 +22,6 @@ class _ConnectionToTheFireplacePageState
   @override
   void initState() {
     super.initState();
-
-
-
   }
 
   @override
@@ -113,7 +110,7 @@ class _ConnectionToTheFireplacePageState
                 SizedBox(
                   height: 40,
                 ),
-                ListWithConnectDevices(),
+                FindDeviceScreenWidget(),
                 Expanded(child: SizedBox()),
                 rowWithDomain(context: context),
               ],

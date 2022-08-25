@@ -3,8 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:fire_ble_app/packages/ui_layout/consts.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/connection_to_the_fireplace_page/maint_connection_to_the_fireplace_page.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartPrime_1000/main_smartPrime_1000.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/sensor_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
@@ -25,10 +24,21 @@ class ScanResultTile extends StatelessWidget {
             flex: 5,
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0, top: 8),
-              child: Text(
-                result.device.name,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.headline2,
+              child: Column(
+                children: [
+                  Text(
+                    result.device.name,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  FittedBox(
+                    child: Text(
+                      result.device.id.toString(),
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.headline3!,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -61,15 +71,21 @@ class ScanResultTile extends StatelessWidget {
                     break;
                   case BluetoothDeviceState.disconnected:
                     onPressed = () async {
-                      await result.device.connect();
-                      print('connect ${result.device.id}');
+                      await result.device.connect(
+                        // timeout: Duration(seconds: 2),
+                        autoConnect: false,
+                      );
 
                       ///сделать проверку по имени и только после этого переводить на страницу управления
+                      ///
+                      print(result.device.id);
                       Get.to(
-                        () => SmartPrime1000Page(
+                        () => SensorPage(
                           device: result.device,
                         ),
                       );
+                      // Get.to(() => SensorPage(device: result.device));
+
                       FlutterBlue.instance.stopScan();
                     };
                     iconState = null;
