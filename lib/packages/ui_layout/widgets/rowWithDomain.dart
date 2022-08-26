@@ -14,10 +14,10 @@ rowWithDomain({context}) => Row(
         ),
         GestureDetector(
           onTap: () {
-            Get.to(SmartPrime1000Page());
+            // Get.to(SmartPrime1000Page());
           },
           child: Text(
-            'abc-fireplace.com',
+             'abc-fireplace.com',
             style: Theme.of(context).textTheme.headline2!.copyWith(
                   color: Colors.white,
                   fontSize: 16,
