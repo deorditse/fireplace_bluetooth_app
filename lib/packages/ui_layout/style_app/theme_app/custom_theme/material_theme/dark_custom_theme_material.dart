@@ -58,7 +58,7 @@ TextTheme _textDart(TextTheme baseTextThemeDark) {
       color: Colors.greenAccent,
     ),
     bodyText2: baseTextThemeDark.bodyText2?.copyWith(
-      color: Colors.white70, //для дефолтного текста
+      color: Colors.white, //для дефолтного текста
     ),
   );
 }

@@ -1,4 +1,4 @@
-import 'package:fire_ble_app/packages/ui_layout/consts.dart';
+import 'package:fire_ble_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
 
 Widget myNavigationBar(context) {
@@ -29,7 +29,7 @@ Widget myNavigationBar(context) {
                 alignment: Alignment.bottomCenter,
                 child: Text(
                   '100%',
-                  style: textStyleFontSarpanch(fontSize: 36),
+                  style: myTextStyleFontSarpanch(fontSize: 36),
                 ),
               ),
             ],
@@ -81,7 +81,7 @@ _temperature() {
               Expanded(
                 child: Text(
                   '24°C',
-                  style: textStyleFontSarpanch(fontSize: 24),
+                  style: myTextStyleFontSarpanch(fontSize: 24),
                 ),
               ),
             ],
@@ -90,9 +90,9 @@ _temperature() {
         // SizedBox(height: 10,),
         Text(
           'температура',
-          style: textStyleFontSarpanch(
+          style: myTextStyleFontSarpanch(
             fontSize: 14,
-            textColor: myTwoColor,
+            textColor: myTreeColor,
           ),
         ),
       ],
@@ -129,7 +129,7 @@ _wet() {
               Expanded(
                 child: Text(
                   '45%',
-                  style: textStyleFontSarpanch(fontSize: 24),
+                  style: myTextStyleFontSarpanch(fontSize: 24),
                 ),
               ),
             ],
@@ -137,9 +137,9 @@ _wet() {
         ),
         Text(
           'влажность',
-          style: textStyleFontSarpanch(
+          style: myTextStyleFontSarpanch(
             fontSize: 14,
-            textColor: myTwoColor,
+            textColor: myTreeColor,
           ),
         ),
       ],

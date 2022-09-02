@@ -1,4 +1,4 @@
-import 'package:fire_ble_app/packages/ui_layout/consts.dart';
+import 'package:fire_ble_app/packages/ui_layout/style_app/style.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/connection_to_the_fireplace_page/widgets/switch.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/find_device_screen_widget.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/widgets/setting_end_drawer/end_drawer_app_bar.dart';

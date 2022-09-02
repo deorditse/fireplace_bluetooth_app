@@ -1,4 +1,4 @@
-import 'package:fire_ble_app/packages/ui_layout/consts.dart';
+import 'package:fire_ble_app/packages/ui_layout/style_app/style.dart';
 import 'package:fire_ble_app/packages/ui_layout/style_app/theme_app/custom_theme/material_theme/dark_custom_theme_material.dart';
 import 'package:fire_ble_app/packages/ui_layout/widgets/rowWithDomain.dart';
 import 'package:flutter/material.dart';

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 
-import '../../consts.dart';
+import '../../style_app/style.dart';
 
 class FindDeviceScreenWidget extends StatelessWidget {
   static const String id = '/listDevices';
@@ -35,56 +35,50 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
     return Container(
       height: MediaQuery.of(context).size.width / 2,
       width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.white,
-          width: 1,
-          style: BorderStyle.solid,
-        ),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: RefreshIndicator(
-        onRefresh: () => FlutterBlue.instance.startScan(
-          timeout: Duration(seconds: 2),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              StreamBuilder<List<ScanResult>>(
-                stream: FlutterBlue.instance.scanResults,
-                initialData: [],
-                builder: (context, snapshot) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ...snapshot.data!.map((r) {
-                        // return ScanResultTile(
-                        //     result: r); //это удалить и добавить ниже
-                        ///
-                        if (r.device.name.length > 0) {
-                          barrier = false;
-                          return ScanResultTile(result: r);
-                        } else {
-                          return Container();
-                        }
-                      }).toList(),
+      child: MyContainerAlert(
+        child: RefreshIndicator(
+          onRefresh: () => FlutterBlue.instance.startScan(
+            timeout: Duration(seconds: 2),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                StreamBuilder<List<ScanResult>>(
+                  stream: FlutterBlue.instance.scanResults,
+                  initialData: [],
+                  builder: (context, snapshot) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ...snapshot.data!.map((r) {
+                          // return ScanResultTile(
+                          //     result: r); //это удалить и добавить ниже
+                          ///
+                          if (r.device.name.length > 0) {
+                            barrier = false;
+                            return ScanResultTile(result: r);
+                          } else {
+                            return Container();
+                          }
+                        }).toList(),
 
-                      ///добавиь
-                      if (barrier)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 28.0),
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              color: myColorActivity,
-                              strokeWidth: 2,
+                        ///добавиь
+                        if (barrier)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 28.0),
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: myColorActivity,
+                                strokeWidth: 2,
+                              ),
                             ),
                           ),
-                        ),
-                    ],
-                  );
-                },
-              ),
-            ],
+                      ],
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:data_layout/data_layout.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 //каждый раз при изменении запускать кодогенерацию
@@ -11,5 +12,6 @@ class FireplaceConnectionGetXController extends GetxController {
   Rx<bool> isSwitch = false.obs;
   Rx<bool> isSettingButton = false.obs;
   Rx<bool> isBlocButton = false.obs;
-
+  int? passwordBlock = 55395;
+  TextEditingController textFieldPassword = TextEditingController();
 }

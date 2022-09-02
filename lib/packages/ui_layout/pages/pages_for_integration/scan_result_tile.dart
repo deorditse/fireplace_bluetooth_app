@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:fire_ble_app/packages/ui_layout/consts.dart';
+import 'package:fire_ble_app/packages/ui_layout/style_app/style.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/test_sensor_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';

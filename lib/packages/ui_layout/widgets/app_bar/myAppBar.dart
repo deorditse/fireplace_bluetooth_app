@@ -2,7 +2,7 @@ import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-Widget mySettingAppBar(context) {
+Widget mySettingAppBar({context}) {
   FireplaceConnectionGetXController _controllerFireplace =
       FireplaceConnectionGetXController.instance;
   return Container(
@@ -17,9 +17,7 @@ Widget mySettingAppBar(context) {
             () => GestureDetector(
               onTap: () {
                 _controllerFireplace.isSettingButton.value = false;
-
-                _controllerFireplace.isBlocButton.value =
-                    !_controllerFireplace.isBlocButton.value;
+                _controllerFireplace.isBlocButton.value = true;
               },
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 8.0, right: 8),
@@ -47,8 +45,10 @@ Widget mySettingAppBar(context) {
           child: Obx(
             () => GestureDetector(
               onTap: () {
-                _controllerFireplace.isSettingButton.value =
-                    !_controllerFireplace.isSettingButton.value;
+                if (!_controllerFireplace.isBlocButton.value) {
+                  _controllerFireplace.isSettingButton.value =
+                      !_controllerFireplace.isSettingButton.value;
+                }
               },
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 8.0, left: 8),

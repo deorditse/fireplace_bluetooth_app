@@ -1,83 +1,75 @@
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-//
-// import '../pages/Test_calendars_page/controller/calendar_page_controller.dart';
-//
-// Color backColorAlertDialog = Colors.black26;
-// Color titleColorAlertDialog = Colors.white;
-// double fontSizeShowDialog = 15;
-// Color buttonStateColor = Colors.green;
-// Color? buttonStateColorChoise = Colors.green.withOpacity(0.7);
-// EdgeInsets paddingAvatars = const EdgeInsets.only(top: 8, bottom: 6);
-//
-// TextEditingController controllerTextFieldUp = TextEditingController(text: "...");
-//
-//
-//
-//
-// void styleButton() {
-//   BoxDecoration(color: Colors.yellow, borderRadius: BorderRadius.circular(20));
-// }
-//
-// BoxDecoration myStyleContainer([color, borderRadius]) {
-//   return BoxDecoration(
-//     color: color != null ? color : Colors.white,
-//     borderRadius: borderRadius != null
-//         ? borderRadius
-//         : BorderRadius.only(
-//             topLeft: Radius.circular(10),
-//             topRight: Radius.circular(10),
-//             bottomLeft: Radius.circular(10),
-//             bottomRight: Radius.circular(10)),
-//     boxShadow: [
-//       BoxShadow(
-//         color: Colors.grey.withOpacity(0.5),
-//         spreadRadius: 5,
-//         blurRadius: 7,
-//         offset: Offset(0, 3), // changes position of shadow
-//       ),
-//     ],
-//   );
-// }
-//
-// TextStyle myTextStyleCheckBox([myColor]) {
-//   return TextStyle(
-//     color: myColor != null ? myColor : Colors.grey,
-//     //fontWeight: FontWeight.bold,
-//   );
-// }
-//
-// TableBasicsController colorController = Get.find<TableBasicsController>();
-//
-// BoxDecoration myBoxDecorationtyleCheckBox([myColor, myBorderStyle]) {
-//   return BoxDecoration(
-//     border: myBorderStyle!
-//         ? Border.all(
-//             color: colorController.myStateColorCheckBox.value,
-//             width: 2,
-//             style: BorderStyle.solid)
-//         : Border.all(
-//             color: Colors.green.shade200,
-//             width: 1,
-//             style: BorderStyle.solid,
-//           ),
-//     color:
-//         myColor != null ? myColor : colorController.myStateColorCheckBox.value,
-//     borderRadius: BorderRadius.circular(100),
-//     boxShadow: [
-//       BoxShadow(
-//         color: myColor != null ? myColor : colorController.myStateColorCheckBox,
-//         spreadRadius: 2,
-//         blurRadius: 5,
-//         offset: Offset(0, 0), // changes position of shadow
-//       ),
-//     ],
-//   );
-// }
-//
-// ButtonStyle myButtonStyleFromShowDialog() {
-//   return ButtonStyle(
-//     backgroundColor: MaterialStateProperty.all<Color>(Colors.green.withOpacity(0.7)),
-//   );
-// }
+import 'package:flutter/material.dart';
+
+Color myColorActivity = Color.fromRGBO(253, 98, 0, 1);
+Color myTwoColor = Color.fromRGBO(196, 196, 196, 1);
+Color myTreeColor = Color.fromRGBO(176, 172, 165, 1);
+
+class MyContainerAlert extends StatelessWidget {
+  MyContainerAlert(
+      {Key? key,
+      required this.child,
+      this.colorBorder,
+      this.height,
+      this.width})
+      : super(key: key);
+
+  Widget child;
+  Color? colorBorder;
+  double? height;
+  double? width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height ?? MediaQuery.of(context).size.height / 10,
+      width: width ?? MediaQuery.of(context).size.width,
+      decoration:
+          _myBoxDecorationBorder(context: context, colorBorder: colorBorder),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: child,
+        ),
+      ),
+    );
+  }
+
+  BoxDecoration _myBoxDecorationBorder({Color? colorBorder, context}) {
+    return BoxDecoration(
+      border: Border.all(
+        color: colorBorder ?? Theme.of(context).primaryColor,
+        width: 1,
+        style: BorderStyle.solid,
+      ),
+      borderRadius: BorderRadius.circular(10),
+    );
+  }
+}
+
+BoxDecoration get myDecorationBackground => const BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.centerRight,
+        stops: [0.0, 0.4, 1.0],
+        colors: [
+          Color.fromRGBO(78, 77, 77, 1),
+          Color.fromRGBO(43, 42, 42, 1),
+          Color.fromRGBO(9, 7, 7, 1),
+        ],
+        tileMode: TileMode.clamp,
+      ),
+    );
+
+TextStyle myTextStyleFontSarpanch({double? fontSize, Color? textColor}) =>
+    TextStyle(
+      color: textColor ?? Colors.white,
+      fontFamily: 'Sarpanch',
+      fontSize: fontSize ?? 16,
+    );
+
+TextStyle myTextStyleFontRoboto({double? fontSize, Color? textColor}) =>
+    TextStyle(
+      color: textColor ?? Colors.white,
+      fontFamily: 'Roboto',
+      fontSize: fontSize ?? 16,
+    );

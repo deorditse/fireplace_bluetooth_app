@@ -1,7 +1,7 @@
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartFireA3_1000/main_smartFireA3_1000.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartFireA5_1000/main_smartFireA5_1000.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartPrime_1000/smartPrime_1000.dart';
-import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/maint_connection_to_the_fireplace_page.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/main_connection_to_the_fireplace_page.dart';
 import 'package:fire_ble_app/packages/ui_layout/test_page/modul_list_devices.dart';
 import 'package:fire_ble_app/packages/ui_layout/widgets/bluetooth_off_screen.dart';
 import 'package:flutter/material.dart';

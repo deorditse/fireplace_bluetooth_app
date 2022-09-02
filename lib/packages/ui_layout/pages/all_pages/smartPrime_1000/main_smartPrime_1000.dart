@@ -1,6 +1,8 @@
 import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
-import 'package:fire_ble_app/packages/ui_layout/consts.dart';
-import 'package:fire_ble_app/packages/ui_layout/widgets/app_bar/mySettingAppBar.dart';
+import 'package:fire_ble_app/packages/ui_layout/style_app/style.dart';
+import 'package:fire_ble_app/packages/ui_layout/widgets/app_bar/body_block_fireplace/block_fireplace.dart';
+import 'package:fire_ble_app/packages/ui_layout/widgets/app_bar/body_setting_fireplace/body_setting_page.dart';
+import 'package:fire_ble_app/packages/ui_layout/widgets/app_bar/myAppBar.dart';
 import 'package:fire_ble_app/packages/ui_layout/widgets/navigation_bar/my_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
@@ -30,26 +32,69 @@ class _SmartPrime1000PageState extends State<SmartPrime1000Page> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                mySettingAppBar(context),
-                Expanded(
-                  child: Center(
-                    child: Obx(() {
-                      if (FireplaceConnectionGetXController
-                          .instance.isBlocButton.value) {
-                        return Text('блоктировка');
-                      } else if (FireplaceConnectionGetXController
-                          .instance.isSettingButton.value) {
-                        return Text('setting');
-                      } else {
-                        return Text('основной контент');
-                      }
-                    }),
-                  ),
-                ),
-                myNavigationBar(context),
+                mySettingAppBar(context: context),
+                BodyContent(),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+myTitleModel() {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 8.0),
+    child: Text(
+      'Модель: Smart Prime 1000',
+      style: myTextStyleFontRoboto(fontSize: 14),
+    ),
+  );
+}
+
+class BodyContent extends StatelessWidget {
+  const BodyContent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Obx(() {
+            if (FireplaceConnectionGetXController.instance.isBlocButton.value) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  myTitleModel(),
+                  Expanded(
+                    child: Center(
+                      child: BlockFireplace(),
+                    ),
+                  ),
+                  myNavigationBar(context),
+                ],
+              );
+            } else {
+              if (FireplaceConnectionGetXController
+                  .instance.isSettingButton.value) {
+                return BodySettingPage();
+              } else {
+                return Column(
+                  children: [
+                    myTitleModel(),
+                    Expanded(
+                      child: Center(
+                        child: Text('основной контент'),
+                      ),
+                    ),
+                    myNavigationBar(context),
+                  ],
+                );
+              }
+            }
+          }),
         ),
       ),
     );

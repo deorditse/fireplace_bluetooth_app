@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:fire_ble_app/packages/ui_layout/consts.dart';
+import 'package:fire_ble_app/packages/ui_layout/style_app/style.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/connection_to_the_fireplace_page/widgets/body_page_result.dart';
 
 import 'package:flutter/material.dart';
