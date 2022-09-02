@@ -13,8 +13,8 @@ enum Devices {
 
 class MySettingGetXController extends GetxController {
   Rx<int> currentTabIndex = 0.obs;
-
   bool switchChangeTheme = Get.isDarkMode;
+
 
   void changeBleDevices({required Devices device}) {
     switch (device) {

@@ -6,7 +6,10 @@ import 'package:get/get.dart';
 //чтобы зарегистрировать как фабрику для GetIt и обращаться к сервис локатору через  MainSimpleStateManagement
 
 class FireplaceConnectionGetXController extends GetxController {
+  static FireplaceConnectionGetXController instance = Get.find();
   Rx<bool> isConnected = false.obs;
   Rx<bool> isSwitch = false.obs;
+  Rx<bool> isSettingButton = false.obs;
+  Rx<bool> isBlocButton = false.obs;
 
 }

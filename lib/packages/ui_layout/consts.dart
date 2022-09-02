@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 Color myColorActivity = Color.fromRGBO(253, 133, 0, 1);
+// Color myMainColor = Colors.white;
+Color myTwoColor = Color.fromRGBO(176, 172, 165, 1);
 
 BoxDecoration get myDecorationBackground => const BoxDecoration(
       gradient: LinearGradient(
@@ -14,4 +16,18 @@ BoxDecoration get myDecorationBackground => const BoxDecoration(
         ],
         tileMode: TileMode.clamp,
       ),
+    );
+
+TextStyle textStyleFontSarpanch({double? fontSize, Color? textColor}) =>
+    TextStyle(
+      color: textColor ?? Colors.white,
+      fontFamily: 'Sarpanch',
+      fontSize: fontSize ?? 16,
+    );
+
+TextStyle textStyleFontRoboto({double? fontSize, Color? textColor}) =>
+    TextStyle(
+      color: textColor ?? Colors.white,
+      fontFamily: 'Roboto',
+      fontSize: fontSize ?? 16,
     );

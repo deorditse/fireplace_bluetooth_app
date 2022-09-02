@@ -1,4 +1,4 @@
-import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartPrime_1000/main_smartPrime_1000.dart';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartPrime_1000/smartPrime_1000.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
