@@ -9,21 +9,32 @@ class BodySettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 15),
+          Flexible(
             child: _closeFirepca(),
           ),
-          _aboutDevice(),
+          Flexible(
+            flex: 2,
+            child: _aboutDevice(),
+          ),
           myDivider(),
-          _setVolume(),
+          Flexible(
+            child: _setVolume(),
+          ),
           myDivider(),
-          _instructionUser(),
+          Flexible(
+            child: _instructionUser(),
+          ),
           myDivider(),
-          _serviceCenter(),
+          Flexible(
+            child: _serviceCenter(),
+          ),
           myDivider(),
+          Expanded(
+            child: SizedBox(),
+          ),
           rowWithDomain(context: context),
         ],
       ),
@@ -33,6 +44,7 @@ class BodySettingPage extends StatelessWidget {
   _closeFirepca() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
           'assets/icons/closeFireplace.png',
@@ -58,6 +70,7 @@ class BodySettingPage extends StatelessWidget {
   _aboutDevice() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           'Об устройстве:',
@@ -68,7 +81,7 @@ class BodySettingPage extends StatelessWidget {
         ),
         Text.rich(
           TextSpan(
-            style: TextStyle(fontSize: 16),
+            style: myTextStyleFontRoboto(fontSize: 14),
             children: [
               TextSpan(
                 text: 'Страна производства: ',
@@ -147,6 +160,7 @@ class BodySettingPage extends StatelessWidget {
 
   _setVolume() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -171,6 +185,7 @@ class BodySettingPage extends StatelessWidget {
 
   _instructionUser() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -186,19 +201,17 @@ class BodySettingPage extends StatelessWidget {
   }
 
   myDivider() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15.0),
-      child: Divider(
-        color: Colors.white,
-        height: 2,
-        thickness: 1,
-      ),
+    return Divider(
+      color: myTwoColor,
+      height: 2,
+      thickness: 1,
     );
   }
 
   _serviceCenter() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           'Контакты сервисного центра:',
