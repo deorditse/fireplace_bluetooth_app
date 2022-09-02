@@ -2,6 +2,7 @@ import 'package:fire_ble_app/packages/business_layout/lib/business_layout.dart';
 import 'package:fire_ble_app/packages/ui_layout/style_app/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class BlockFireplace extends StatelessWidget {
   const BlockFireplace({Key? key}) : super(key: key);
@@ -73,19 +74,26 @@ Widget _textField(context) {
       Expanded(
         child: Column(
           children: [
-            Container(
-              height: 40,
-              width: MediaQuery.of(context).size.width / 2.5,
-              child: _myTextField(),
+            Flexible(
+              flex: 2,
+              child: SizedBox(
+                // height: 40,
+                width: MediaQuery.of(context).size.width / 2.5,
+                child: _myTextField(),
+              ),
             ),
             SizedBox(
               height: 20,
             ),
-            Expanded(
+            Flexible(
+              flex: 6,
               child: Image.asset(
                 'assets/icons/mainBlock.png',
                 fit: BoxFit.cover,
               ),
+            ),
+            SizedBox(
+              height: 20,
             ),
           ],
         ),
@@ -97,6 +105,7 @@ Widget _textField(context) {
 TextField _myTextField() {
   final textController = FireplaceConnectionGetXController.instance;
   return TextField(
+    maxLength: 4,
     controller: textController.textFieldPassword,
     onChanged: (password) {
       if (password == textController.passwordBlock.toString()) {
@@ -114,7 +123,21 @@ TextField _myTextField() {
       border: UnderlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
     ),
-    keyboardType: TextInputType.number,
+    // keyboardType: TextInputType.number,
+    keyboardType: TextInputType.visiblePassword,
+    inputFormatters: <TextInputFormatter>[
+      FilteringTextInputFormatter.singleLineFormatter,
+    ],
+    obscureText: true,
+
+    //
+    // keyboardType: TextInputType.number,
+    // inputFormatters: <TextInputFormatter>[
+    //   FilteringTextInputFormatter.singleLineFormatter,
+    // ],
+    // obscureText: true,
+    obscuringCharacter: '*',
+
     cursorColor: myColorActivity,
   );
 }

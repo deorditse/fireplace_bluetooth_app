@@ -9,7 +9,7 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 
 class ScanResultTile extends StatelessWidget {
- const ScanResultTile({Key? key, required this.result}) : super(key: key);
+  const ScanResultTile({Key? key, required this.result}) : super(key: key);
 
   final ScanResult result;
 

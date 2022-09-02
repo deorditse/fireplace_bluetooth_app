@@ -12,6 +12,6 @@ class FireplaceConnectionGetXController extends GetxController {
   Rx<bool> isSwitch = false.obs;
   Rx<bool> isSettingButton = false.obs;
   Rx<bool> isBlocButton = false.obs;
-  int? passwordBlock = 55395;
+  int? passwordBlock = 5539;
   TextEditingController textFieldPassword = TextEditingController();
 }
