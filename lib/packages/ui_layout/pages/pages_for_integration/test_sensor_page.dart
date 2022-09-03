@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:fire_ble_app/packages/ui_layout/pages/all_pages/smartPrime_1000/main_smartPrime_1000.dart';
 import 'package:fire_ble_app/packages/ui_layout/style_app/style.dart';
 import 'package:fire_ble_app/packages/ui_layout/pages/pages_for_integration/connection_to_the_fireplace_page/widgets/body_page_result.dart';
 
@@ -140,6 +141,13 @@ class _SensorPageState extends State<SensorPage> {
                     //     'не распознано $SERVICE_UUID или $CHARACTERISTIC_UUID');
 
                     ),
+                ElevatedButton(
+                    onPressed: () {
+                      Get.to(
+                        SmartPrime1000Page(device: device),
+                      );
+                    },
+                    child: Text('страница проверки')),
               ],
             ),
           ),

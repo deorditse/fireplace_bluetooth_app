@@ -18,10 +18,7 @@ class ConnectionToTheFireplacePage extends StatefulWidget {
 
 class _ConnectionToTheFireplacePageState
     extends State<ConnectionToTheFireplacePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
+
 
   @override
   void dispose() {

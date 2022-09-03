@@ -11,9 +11,8 @@ import 'package:get/get.dart';
 class SmartPrime1000Page extends StatefulWidget {
   static const String id = '/smartPrime1000Page';
 
-  SmartPrime1000Page({
-    Key? key,
-  }) : super(key: key);
+  SmartPrime1000Page({Key? key, this.device}) : super(key: key);
+  BluetoothDevice? device;
 
   @override
   State<SmartPrime1000Page> createState() => _SmartPrime1000PageState();
