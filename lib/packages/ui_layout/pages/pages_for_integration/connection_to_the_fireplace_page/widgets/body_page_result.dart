@@ -29,7 +29,9 @@ class ServiceTile extends StatelessWidget {
     return Column(children: [
       Column(
         children: [
-          Text('Service'),
+          Text(
+            'Service',
+          ),
           Text(
             'UUID ${service.uuid.toString().toUpperCase()}',
           ),

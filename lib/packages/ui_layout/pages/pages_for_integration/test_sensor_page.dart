@@ -76,6 +76,9 @@ class _SensorPageState extends State<SensorPage> {
                       Get.back();
                     }
 
+                    print(
+                        '_SensorPageState Device is ${snapshot.data.toString().split('.')[1]}.');
+
                     return ListTile(
                       leading: Icon(Icons.bluetooth_connected),
                       title: Text(
@@ -112,6 +115,10 @@ class _SensorPageState extends State<SensorPage> {
                     stream: device!.services, //поток
                     initialData: [],
                     builder: (c, snapshot) {
+                      print(
+                          '_SensorPageState List<BluetoothService> ${device.services}.');
+
+                      /// провести тест с получением данных
                       snapshot.data!.forEach(
                         (service) {
                           if (service.uuid.toString() == SERVICE_UUID) {
@@ -127,6 +134,8 @@ class _SensorPageState extends State<SensorPage> {
                           }
                         },
                       );
+
+                      ///
                       // return _buildServiceTiles(
                       //   snapshot.data![2],
                       //   snapshot.data!.last.characteristics.last,
@@ -259,16 +268,19 @@ class CharacteristicTile extends StatelessWidget {
       initialData: characteristic.lastValue,
       builder: (c, snapshot) {
         final value = snapshot.data;
+        print('_CharacteristicTile snapshot.data______ ${value}.');
+        print(
+            '_CharacteristicTile snapshot.data_______dataFromMicrocontroller ${_dataFromMicrocontroller(value!)}.');
+
         return Card(
           child: Column(
             children: [
               Text('uuid ${characteristic.uuid.toString().toUpperCase()}'),
               Text('Characteristic'),
               Text(value.toString()),
+
               // Text(_dataFromMicrocontroller(value!).toString()),
-              Column(
-                children: descriptorTiles,
-              ),
+              Column(children: descriptorTiles),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -328,12 +340,18 @@ class DescriptorTile extends StatelessWidget {
       subtitle: StreamBuilder<List<int>>(
         stream: descriptor.value,
         initialData: descriptor.lastValue,
-        builder: (c, snapshot) => Column(
-          children: [
-            Text(snapshot.data.toString()),
-            Text(_dataFromMicrocontroller(snapshot.data ?? []).toString()),
-          ],
-        ),
+        builder: (c, snapshot) {
+          print(
+              'DescriptorTile descriptor.value  <List<int>______ ${snapshot.data}.');
+          print(
+              'DescriptorTile descriptor.value  <List<int>_______dataFromMicrocontroller ${_dataFromMicrocontroller(snapshot.data ?? [])}.');
+          return Column(
+            children: [
+              Text(snapshot.data.toString()),
+              Text(_dataFromMicrocontroller(snapshot.data ?? []).toString()),
+            ],
+          );
+        },
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
